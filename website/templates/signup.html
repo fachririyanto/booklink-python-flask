@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{ args['page_title'] }} - {{ args['app_name'] }}
+{% endblock %}
+
+{% block main_content %}
+    <section class="page-signup flex fixed inset p-4 w-full h-full items-center" id="page-signup">
+        <div class="mx-auto w-full max-w-md">
+            <h1 class="mb-12 text-4xl font-bold">Sign Up</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <div class="alert -mt-2 mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="alert -mt-2 mb-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form action="/signup" method="post">
+                <div class="mb-8">
+                    <label class="block">
+                        <span class="text-gray-500">Email</span>
+                        <input type="email" name="email" class="mt-0 block w-full py-1 px-0 border-0 ring-0 outline-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black" required />
+                    </label>
+                </div>
+                <div class="mb-8">
+                    <label class="block">
+                        <span class="text-gray-500">Password</span>
+                        <input type="password" name="password" class="mt-0 block w-full py-1 px-0 border-0 ring-0 outline-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black" required />
+                    </label>
+                </div>
+                <div class="mb-8">
+                    <label class="block">
+                        <span class="text-gray-500">Confirm Password</span>
+                        <input type="password" name="confirm_password" class="mt-0 block w-full py-1 px-0 border-0 ring-0 outline-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black" required />
+                    </label>
+                </div>
+                <div class="mb-8">
+                    <label class="block">
+                        <span class="text-gray-500">Full Name</span>
+                        <input type="text" name="fullname" class="mt-0 block w-full py-1 px-0 border-0 ring-0 outline-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black" required />
+                    </label>
+                </div>
+                <div class="mb-12 text-right">
+                    <button type="submit" class="bg-black hover:bg-black text-white font-bold py-3 px-8 rounded focus:outline-none focus:shadow-outline">
+                        Sign Up
+                    </button>
+                </div>
+                <div class="text-center">
+                    Have an account? <a href="/login" class="text-primary underline font-semibold">Login</a>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

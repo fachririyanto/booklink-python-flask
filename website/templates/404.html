@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{ args['page_title'] }} - {{ args['app_name'] }}
+{% endblock %}
+
+{% block main_content %}
+    <section class="page-404 flex fixed inset w-full h-full p-4 items-center justify-center" id="page-404">
+        <div class="w-full max-w-2xl text-center">
+            <h1 class="mb-6 text-6xl font-medium">Error 404</h1>
+            <p class="text-lg">Page not found. Back to <a href="/" class="underline font-medium">Home page</a></p>
+        </div>
+    </section>
+{% endblock %}

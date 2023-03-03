@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{ args['page_title'] }} - {{ args['app_name'] }}
+{% endblock %}
+
+{% block main_content %}
+    <section class="page-login flex fixed inset p-4 w-full h-full items-center" id="page-login">
+        <div class="mx-auto w-full max-w-md">
+            <h1 class="mb-12 text-4xl font-bold">Welcome Back!!</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <div class="alert -mt-2 mb-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form action="/login" method="post">
+                <div class="mb-8">
+                    <label class="block">
+                        <span class="text-gray-500">Email</span>
+                        <input type="email" name="email" class="mt-0 block w-full py-1 px-0 border-0 ring-0 outline-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black" required />
+                    </label>
+                </div>
+                <div class="mb-8">
+                    <label class="block">
+                        <span class="text-gray-500">Password</span>
+                        <input type="password" name="password" class="mt-0 block w-full py-1 px-0 border-0 ring-0 outline-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black" required />
+                    </label>
+                </div>
+                <div class="flex mb-12 items-center">
+                    <span class="flex-grow">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="remember" value="on" class="border-gray-300 border-2 text-black focus:border-gray-300 focus:ring-black" />
+                            <span class="ml-2">Remember me?</span>
+                        </label>
+                    </span>
+                    <button type="submit" class="bg-black hover:bg-black text-white font-bold py-3 px-8 rounded focus:outline-none focus:shadow-outline">
+                        Login
+                    </button>
+                </div>
+                <div class="text-center">
+                    Don't have an account? <a href="/signup" class="text-primary underline font-semibold">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

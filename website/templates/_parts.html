@@ -1,0 +1,37 @@
+{% macro block_header(app_name, current_menu='links') %}
+    <header class="block-header">
+        <div class="container mx-auto px-4">
+            <div class="flex h-20 items-center border-b">
+                <h1 class="flex-grow font-semibold text-2xl">
+                    <a href="/">{{ app_name }}</a>
+                </h1>
+                <nav class="flex-nowrap font-medium">
+                    <ul>
+                        {% set menus = [('Home', 'home', '/'), ('Edit Profile', 'edit-profile', '/edit-profile'), ('Logout', 'logout', '/logout')] %}
+                        {% for title, slug, url in menus %}
+                            <li class="inline-flex">
+                                {% if slug == current_menu %}
+                                    <a href="{{ url }}" class="block ml-5 py-1 font-medium text-green-600 hover:underline">{{ title }}</a>
+                                {% else %}
+                                    <a href="{{ url }}" class="block ml-5 py-1 font-medium hover:underline">{{ title }}</a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+{% endmacro %}
+
+{% macro alert(message, category = '') %}
+    {% if category == 'success' %}
+        <div class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            {{ message }}
+        </div>
+    {% else %}
+        <div class="alert bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+{% endmacro %}
